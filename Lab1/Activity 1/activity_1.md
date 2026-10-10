@@ -138,4 +138,4 @@ Recommended hardware:
 - 1 × NVIDIA B200
 - 1 × NVIDIA B300
 
-The model has an approximately 78 GB memory footprint using FP8 weights.
+The model has an approximately 78GB memory footprint using FP8 weights.
