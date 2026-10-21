@@ -56,23 +56,16 @@ class WeatherData(BaseModel):
 
 
 def get_weather(location, event_date):
-
     api_key = os.getenv("WEATHER_API_KEY")
-
     url = "https://api.weatherapi.com/v1/forecast.json"
-
     params = {"key": api_key,"q": location,"dt": event_date}
-
     response = requests.get(url, params=params)
-
     data = response.json()
-
     weather = WeatherData(temperature=str(data["forecast"]["forecastday"][0]["day"]["avgtemp_c"]) + " °C",
         precipitation_chance=str(data["forecast"]["forecastday"][0]["day"]["daily_chance_of_rain"]) + "%",
         conditions=data["forecast"]["forecastday"][0]["day"]["condition"]["text"]
     )
     return weather
-
 
 step3_prompt = ChatPromptTemplate.from_messages([
     (
@@ -112,9 +105,7 @@ step3_parser = StrOutputParser()
 step3_chain = step3_prompt | llm | step3_parser
 
 
-
 event_description_text = input("Enter event description: ")
-
 
 step1_result = step1_chain.invoke({"event_description_text": event_description_text})
 
@@ -126,7 +117,6 @@ step2_result = get_weather(step1_result.location,step1_result.event_date)
 
 print("\nSTEP 2: Weather Data")
 print(step2_result)
-
 
 
 step3_result = step3_chain.invoke({
